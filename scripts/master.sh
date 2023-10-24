@@ -35,50 +35,6 @@ sed -i -e 's|192.168.0.0/16|172.16.0.0/16|g' custom-resources.yaml
 kubectl apply -f custom-resources.yaml
 
 
-
-
-## Install Calico Network Plugin
-#cat > patch.yaml <<EOF
-#---
-#kind: DaemonSet
-#apiVersion: apps/v1
-#metadata:
-#  name: calico-node
-#  namespace: kube-system
-#  labels:
-#    k8s-app: calico-node
-#spec:
-#  template:
-#    spec:
-#      containers:
-#        - name: calico-node
-#          env:
-#            - name: IP_AUTODETECTION_METHOD
-#              value: "interface=eth1"
-#EOF
-#
-#cat > kustomization.yaml <<EOF
-#---
-#apiVersion: kustomize.config.k8s.io/v1beta1
-#kind: Kustomization
-#
-#resources:
-#  - https://raw.githubusercontent.com/projectcalico/calico/v3.26.0/manifests/calico.yaml
-#
-#patchesStrategicMerge:
-#  - patch.yaml
-#EOF
-#
-#kubectl apply -k .
-
-
-
-
-#curl https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml -O
-#sed -i -e 's|10.244.0.0/16|172.16.0.0/16|g' kube-flannel.yml
-#kubectl apply -f kube-flannel.yml
-
-
 sudo -i -u vagrant bash << EOF
 whoami
 mkdir -p /home/vagrant/.kube
