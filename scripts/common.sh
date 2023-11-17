@@ -2,8 +2,9 @@
 #
 # Common setup for all servers (Control Plane and Nodes)
 
-sudo zypper update
-sudo zypper refresh
+sudo zypper --non-interactive update
+sudo zypper --non-interactive refresh
+sudo zypper install -y cron
 
 #ensure the swap is disable
 sudo swapoff -a
